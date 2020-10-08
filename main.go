@@ -17,6 +17,7 @@ import (
 	"github.com/fyne-io/examples/clock"
 	"github.com/fyne-io/examples/fractal"
 	"github.com/fyne-io/examples/img/icon"
+	"github.com/fyne-io/examples/joystick"
 	"github.com/fyne-io/examples/life"
 	"github.com/fyne-io/examples/solitaire"
 	"github.com/fyne-io/examples/textedit"
@@ -66,6 +67,7 @@ func main() {
 	apps = append(apps, appInfo{"Fractal", icon.FractalBitmap, true, fractal.Show})
 	apps = append(apps, appInfo{"Life", icon.Life, true, life.Show})
 	apps = append(apps, appInfo{"Solitaire", icon.SolitaireBitmap, true, solitaire.Show})
+	apps = append(apps, appInfo{"Joystick", icon.BugBitmap, true, joystick.Show})
 
 	flags := make(map[string]*bool)
 	for _, launch := range apps {

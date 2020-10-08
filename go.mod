@@ -5,7 +5,7 @@ go 1.12
 require (
 	fyne.io/fyne v1.3.0
 	github.com/Knetic/govaluate v3.0.0+incompatible
-	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20200625191551-73d3c3675aa3 // indirect
+	github.com/go-gl/glfw/v3.3/glfw v0.0.0-20200625191551-73d3c3675aa3
 	github.com/stretchr/testify v1.6.1
 	golang.org/x/image v0.0.0-20200618115811-c13761719519 // indirect
 	golang.org/x/net v0.0.0-20200625001655-4c5254603344 // indirect
