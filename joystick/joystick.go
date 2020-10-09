@@ -58,8 +58,24 @@ func newJoyUI() *joyUI {
 	return &ui
 }
 
-func (ui *joyUI) update(joy glfw.Joystick) {
-	if !joy.Present() {
+func (ui *joyUI) update(app fyne.App, joy glfw.Joystick) {
+	present := false
+	name := ""
+	var buttons []glfw.Action
+	var axes []float32
+	var hats []glfw.JoystickHatState
+
+	app.Driver().RunOnMain(func() {
+		present = joy.Present()
+		if present {
+			name = joy.GetName()
+			buttons = joy.GetButtons()
+			axes = joy.GetAxes()
+			hats = joy.GetHats()
+		}
+	})
+
+	if !present {
 		ui.nameLabel.Text = fmt.Sprintf("Joystick %v not available", joy)
 		for i := 1; i < len(ui.labels.Children); i++ {
 			ui.labels.Children[i].Hide()
@@ -68,11 +84,7 @@ func (ui *joyUI) update(joy glfw.Joystick) {
 		return
 	}
 
-	ui.nameLabel.Text = joy.GetName()
-	buttons := joy.GetButtons()
-	axes := joy.GetAxes()
-	hats := joy.GetHats()
-
+	ui.nameLabel.Text = name
 	w := 1
 	for e := 0; e < maxElements; e++ {
 		if e < len(buttons) {
@@ -138,8 +150,8 @@ func Show(app fyne.App) {
 			case <-done:
 				return
 			case <-ticker.C:
-				joyUI1.update(glfw.Joystick1)
-				joyUI2.update(glfw.Joystick2)
+				joyUI1.update(app, glfw.Joystick1)
+				joyUI2.update(app, glfw.Joystick2)
 				content.Refresh()
 			}
 		}
